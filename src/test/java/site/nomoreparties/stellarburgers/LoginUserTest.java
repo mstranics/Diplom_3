@@ -23,7 +23,7 @@ public class LoginUserTest extends BaseTest{
     private String accessToken;
 
     private String email=faker.internet().emailAddress();
-    private String name=faker.name().username();;
+    private String name=faker.name().username();
     private String password=faker.internet().password(6,7);
     @Before
     public void setUp() {
