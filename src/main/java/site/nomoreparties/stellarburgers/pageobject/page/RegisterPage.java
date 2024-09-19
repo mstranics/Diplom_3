@@ -1,5 +1,6 @@
 package site.nomoreparties.stellarburgers.pageobject.page;
 
+import helpers.User;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -48,10 +49,10 @@ driver.findElement(nameInput).sendKeys(name);
     }
 
     @Step("Register new user with name email and password")
-    public void registerNewUser (String name, String email, String password) {
-        fillName(name);
-        fillEmail(email);
-        fillPassword(password);
+    public void registerNewUser (User user) {
+        fillName(user.getName());
+        fillEmail(user.getEmail());
+        fillPassword(user.getPassword());
         clickRegister();
     }
 

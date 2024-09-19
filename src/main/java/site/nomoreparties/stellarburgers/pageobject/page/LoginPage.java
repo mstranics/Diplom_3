@@ -1,5 +1,6 @@
 package site.nomoreparties.stellarburgers.pageobject.page;
 
+import helpers.UserCreds;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -47,9 +48,9 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Login with email and password")
-    public void loginWithUser (String email, String password) {
-        fillEmail(email);
-        fillPassword(password);
+    public void loginWithUser (UserCreds userCreds) {
+        fillEmail(userCreds.getEmail());
+        fillPassword(userCreds.getPassword());
         clickLogInButton();
     }
 

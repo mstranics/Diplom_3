@@ -7,31 +7,31 @@ import site.nomoreparties.stellarburgers.pageobject.page.MainPage;
 import static org.junit.Assert.assertTrue;
 
 
-public class ConstructorTest extends BaseTest{
+public class ConstructorTest extends BaseTest {
 
 
+    @Test
+    @DisplayName("Pan tab can be opened")
+    public void openPans() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.clickSaucesButton();
+        mainPage.clickFillingsButton();
+        mainPage.clickPansButton();
+        assertTrue(mainPage.isPansEnabled());
+    }
 
-
-@Test
-@DisplayName("Pan tab can be opened")
-    public void openPans (){
-    MainPage mainPage = new MainPage(driver);
-    mainPage.clickSaucesButton();
-    mainPage.clickFillingsButton();
-    mainPage.clickPansButton();
-    assertTrue(mainPage.isPansEnabled());
-}
     @Test
     @DisplayName("Sauces tab can be opened")
-    public void openSauces (){
+    public void openSauces() {
 
         MainPage mainPage = new MainPage(driver);
         mainPage.clickSaucesButton();
         assertTrue(mainPage.isSaucesEnabled());
     }
+
     @Test
     @DisplayName("Fillings tab can be opened")
-    public void openFillings (){
+    public void openFillings() {
 
 
         MainPage mainPage = new MainPage(driver);

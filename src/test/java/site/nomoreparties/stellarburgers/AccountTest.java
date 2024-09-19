@@ -1,7 +1,10 @@
 package site.nomoreparties.stellarburgers;
 
+import helpers.User;
 import helpers.UserClient;
 import com.github.javafaker.Faker;
+import helpers.UserCreds;
+import helpers.UserHelper;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
@@ -17,49 +20,52 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 
-public class AccountTest extends BaseTest{
+public class AccountTest extends BaseTest {
     Faker faker = new Faker();
     private UserClient userClient;
+    private User user;
     private String accessToken;
-private String refreshToken;
-    private final String email=faker.internet().emailAddress();
-    private final String name=faker.name().username();
-    private final String password=faker.internet().password(6,7);
+    private String refreshToken;
+
+
     @Before
     public void setUp() {
         userClient = new UserClient();
-        ValidatableResponse createResponse =userClient.create(name,email,password);
-        assertEquals(200,createResponse.extract().statusCode());
-        accessToken=createResponse.extract().path("accessToken");
-        refreshToken=createResponse.extract().path("refreshToken");
+        user = UserHelper.addUser();
+        ValidatableResponse createResponse = userClient.create(user);
+        assertEquals(200, createResponse.extract().statusCode());
+        accessToken = createResponse.extract().path("accessToken");
+        refreshToken = createResponse.extract().path("refreshToken");
 
     }
 
     @After
     public void cleanUP() {
-    userClient.delete(accessToken);
-}
-@Test
-@DisplayName("Profile can be opened ")
-    public void openAccount (){
+        userClient.delete(accessToken);
+    }
 
-    HeaderFragment headerFragment = new HeaderFragment(driver);
-    AccountPage accountPage= new AccountPage(driver);
-    JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-    jsExecutor.executeScript((String.format(
-            "window.localStorage.setItem('accessToken','%s');", accessToken)));
-
-    headerFragment.clickAccountButton();
-    assertTrue(accountPage.isProfileShown());
-
-}
     @Test
-    @DisplayName("Profile can be quited ")
-    public void quitAccount ()  {
+    @DisplayName("Profile can be opened ")
+    public void openAccount() {
 
         HeaderFragment headerFragment = new HeaderFragment(driver);
-        AccountPage accountPage= new AccountPage(driver);
-        LoginPage loginPage= new LoginPage(driver);
+        AccountPage accountPage = new AccountPage(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript((String.format(
+                "window.localStorage.setItem('accessToken','%s');", accessToken)));
+
+        headerFragment.clickAccountButton();
+        assertTrue(accountPage.isProfileShown());
+
+    }
+
+    @Test
+    @DisplayName("Profile can be quited ")
+    public void quitAccount() {
+
+        HeaderFragment headerFragment = new HeaderFragment(driver);
+        AccountPage accountPage = new AccountPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript((String.format(
                 "window.localStorage.setItem('accessToken','%s');", accessToken)));
@@ -74,7 +80,7 @@ private String refreshToken;
 
     @Test
     @DisplayName("Constructor can be opened from account via constructor button ")
-    public void constructorIsOpenedFromAccount ()   {
+    public void constructorIsOpenedFromAccount() {
 
         HeaderFragment headerFragment = new HeaderFragment(driver);
         MainPage mainPage = new MainPage(driver);
@@ -88,9 +94,10 @@ private String refreshToken;
         assertTrue(mainPage.isCreateOrderShown());
 
     }
+
     @Test
     @DisplayName("Constructor can be opened from account via logo ")
-    public void constructorIsOpenedFromAccountViaLogo ()  {
+    public void constructorIsOpenedFromAccountViaLogo() {
 
         HeaderFragment headerFragment = new HeaderFragment(driver);
         MainPage mainPage = new MainPage(driver);

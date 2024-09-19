@@ -12,22 +12,21 @@ private static final String  REGISTER_USER_PATH ="/api/auth/register";
     private static final String USER_PATH = "/api/auth/user";
 
     @Step("Create user via API")
-    public ValidatableResponse create(String name, String email,String password ) {
-      String  body =String.format("{\"name\": \"%s\",\"email\": \"%s\", \"password\": \"%s\"}",name,email,password);
+    public ValidatableResponse create(User user ) {
         return given().filter(new AllureRestAssured())
                 .spec(getBaseSpec())
-                .body(body)
+                .body(user)
                 .when()
                 .post(REGISTER_USER_PATH)
                 .then();
     }
 
     @Step("Login via API")
-    public ValidatableResponse login(String email,String password) {
-        String  body =String.format("{\"email\": \"%s\", \"password\": \"%s\"}",email,password);
+    public ValidatableResponse login(UserCreds userCreds) {
+
         return given().log().all().filter(new AllureRestAssured())
                 .spec(getBaseSpec())
-                .body(body)
+                .body(userCreds)
                 .when()
                 .post(LOGIN_USER_PATH)
                 .then().log().body();
