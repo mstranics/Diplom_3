@@ -1,6 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
-import Helpers.UserClient;
+import helpers.UserClient;
 import com.github.javafaker.Faker;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;

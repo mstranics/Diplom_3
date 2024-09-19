@@ -1,6 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
-import Helpers.UserClient;
+import helpers.UserClient;
 import com.github.javafaker.Faker;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -23,7 +23,7 @@ public class AccountTest extends BaseTest{
     private String accessToken;
 private String refreshToken;
     private final String email=faker.internet().emailAddress();
-    private final String name=faker.name().username();;
+    private final String name=faker.name().username();
     private final String password=faker.internet().password(6,7);
     @Before
     public void setUp() {

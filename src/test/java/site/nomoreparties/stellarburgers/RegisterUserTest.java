@@ -1,6 +1,6 @@
 package site.nomoreparties.stellarburgers;
 
-import Helpers.UserClient;
+import helpers.UserClient;
 import com.github.javafaker.Faker;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import site.nomoreparties.stellarburgers.pageobject.fragment.HeaderFragment;
 import site.nomoreparties.stellarburgers.pageobject.page.LoginPage;
-import site.nomoreparties.stellarburgers.pageobject.page.MainPage;
 import site.nomoreparties.stellarburgers.pageobject.page.RegisterPage;
 
 import static org.junit.Assert.assertEquals;

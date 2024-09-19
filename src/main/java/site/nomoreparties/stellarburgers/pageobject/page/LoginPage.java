@@ -5,14 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import site.nomoreparties.stellarburgers.pageobject.page.BasePage;
-
-import java.time.Duration;
 
 
 
 public class LoginPage extends BasePage {
-    public static String URL ="https://stellarburgers.nomoreparties.site/login";
+
     private final By loginForm= By.xpath(".//h2[text()='Вход']/parent::div/form");
     private final By registerButton= By.xpath(".//a[text()='Зарегистрироваться']");
     private final By restorePassButton= By.xpath(".//a[text()='Восстановить пароль']");
